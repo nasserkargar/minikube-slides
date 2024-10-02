@@ -1,0 +1,23 @@
+apt install curl apt-transport-https
+apt install docker.io
+**************************************   minikube
+wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo cp minikube-linux-amd64 /usr/local/bin/minikube
+chmod 755 /usr/local/bin/minikube
+minikube version
+**************************************   kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+or
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+chmod +x kubectl
+cp kubectl /usr/local/bin/
+./kubectl version -o json
+sudo usermod -aG docker user1
+exit and relogin
+
+*************************************** create cluster
+docker pull ghcr.io/kubernetes/minikube/kicbase:v0.0.17
+minikube start --driver=docker --base-image=ghcr.io/kubernetes/minikube/kicbase:v0.0.17 --kubernetes-version=v1.23.2
+kubectl get node
+***********
